@@ -8,7 +8,8 @@ const {
     updateInstanceInDatabase,
     deleteFromDatabasebyId,
     deleteAllFromDatabase,
-  } = require('db.js');
+  } = require('./db.js');
+
 
 
 
