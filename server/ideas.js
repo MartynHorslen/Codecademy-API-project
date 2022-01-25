@@ -17,7 +17,6 @@ ideasRouter.get('/', (req, res, next) => {
     if (allIdeas === -1){
         res.status(404).send();
     } else {
-        console.log(allIdeas);
         res.status(200).send(allIdeas);
     }
 });

@@ -17,7 +17,6 @@ minionsRouter.get('/', (req, res, next) => {
     if (allMinions === -1){
         res.status(404).send();
     } else {
-        console.log(allMinions);
         res.status(200).send(allMinions);
     }
 });
@@ -28,9 +27,12 @@ minionsRouter.get('/:id', (req, res, next) => {
     if (found === -1){
         res.status(404).send();
     } else {
-        console.log(found);
         res.status(200).send(found);
     }
+});
+
+minionsRouter.post('/', (req, res, next) => {
+    
 });
 
 
