@@ -1,5 +1,6 @@
 const express = require('express');
 const req = require('express/lib/request');
+const checkMillionDollarIdea = require('./checkMillionDollarIdea.js');
 const ideasRouter = express.Router();
 const {
     createMeeting,
@@ -56,7 +57,7 @@ const validation = (req, res, next) => {
 }
 
 //POST /api/ideas
-ideasRouter.post('/', validation, (req, res, next) => {
+ideasRouter.post('/', validation, checkMillionDollarIdea, (req, res, next) => {
     const createIdea = addToDatabase('ideas', req.body);
     res.status(201).send(createIdea);
 });
