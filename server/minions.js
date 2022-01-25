@@ -1,4 +1,5 @@
 const express = require('express');
+const req = require('express/lib/request');
 const minionsRouter = express.Router();
 const {
     createMeeting,
@@ -18,6 +19,18 @@ minionsRouter.get('/', (req, res, next) => {
     } else {
         console.log(allMinions);
         res.status(200).send(allMinions);
+    }
+});
+
+//GET /api/minions/:id
+minionsRouter.get('/:id', (req, res, next) => {
+    const found = getFromDatabaseById('minions', req.params.id);
+    if (found === -1){
+        res.status(404).send();
+    } else {
+        const obj = Object.fromEntries(found);
+        console.log(obj);
+        res.status(200).send(obj);
     }
 });
 
