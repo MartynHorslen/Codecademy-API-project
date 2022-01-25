@@ -23,8 +23,7 @@ meetingsRouter.get('/', (req, res, next) => {
 
 //POST /api/meetings
 meetingsRouter.post('/', (req, res, next) => {
-    const meeting = createMeeting();
-    res.status(201).send(meeting);
+    res.status(201).send(addToDatabase('meetings', createMeeting()));
 });
 
 meetingsRouter.delete('/', (req, res, next) => {
