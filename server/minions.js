@@ -12,7 +12,12 @@ const {
     deleteAllFromDatabase,
   } = require('./db.js');
 
-  
+//Require minions work router
+const workRouter = require('./work.js');
+
+//Mount work router
+minionsRouter.use('/:id/work', workRouter);
+
 //Param matching for :id
 minionsRouter.param('id', (req, res, next, id) => {
     const testNumber = Number(id);
