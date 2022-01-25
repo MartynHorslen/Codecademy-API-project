@@ -13,7 +13,16 @@ const {
 
   
 //Param matching for :id
-//minionsRouter.use('id', (req, res, next, id) => {});
+minionsRouter.param('id', (req, res, next, id) => {
+    const found = getFromDatabaseById('minions', id);
+    if (found === -1){
+        res.status(404).send();
+    } else {
+        req.minion = found;
+        req.body.id = id;
+        next();
+    }
+});
 
 //GET /api/minions
 minionsRouter.get('/', (req, res, next) => {
@@ -27,12 +36,7 @@ minionsRouter.get('/', (req, res, next) => {
 
 //GET /api/minions/:id
 minionsRouter.get('/:id', (req, res, next) => {
-    const found = getFromDatabaseById('minions', req.params.id);
-    if (found === -1){
-        res.status(404).send();
-    } else {
-        res.status(200).send(found);
-    }
+    res.status(200).send(req.minion);
 });
 
 //POST & PUT minions validation
@@ -56,7 +60,8 @@ minionsRouter.post('/', validation, (req, res, next) => {
 
 //PUT /api/minions
 minionsRouter.put('/:id', validation, (req, res, next) => {
-    console.log('PUT');
+    const update = updateInstanceInDatabase('minions', req.body);
+    res.status(200).send(req.body);
 });
 
 module.exports = minionsRouter;
