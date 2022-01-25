@@ -1,5 +1,6 @@
 const express = require('express');
 const req = require('express/lib/request');
+const { type } = require('express/lib/response');
 const minionsRouter = express.Router();
 const {
     createMeeting,
@@ -14,13 +15,18 @@ const {
   
 //Param matching for :id
 minionsRouter.param('id', (req, res, next, id) => {
-    const found = getFromDatabaseById('minions', id);
-    if (found === -1){
-        res.status(404).send();
+    const testNumber = Number(id);
+    if (testNumber == 'NaN'){
+        res.status(400).send();
     } else {
-        req.minion = found;
-        req.body.id = id;
-        next();
+        const found = getFromDatabaseById('minions', id);
+        if (found === -1 || !found){
+            res.status(404).send();
+        } else {
+            req.minion = found;
+            req.body.id = id;
+            next();
+        }
     }
 });
 
@@ -41,11 +47,11 @@ minionsRouter.get('/:id', (req, res, next) => {
 
 //POST & PUT minions validation
 const validation = (req, res, next) => {
-    const name = req.body.name;
-    const title = req.body.title;
+    //const name = req.body.name;
+    //const title = req.body.title;
     const salary = Number(req.body.salary);
-    const weaknesses = req.body.weaknesses;
-    if (name === '' || title === '' || salary === '' || weaknesses === ''){
+    //const weaknesses = req.body.weaknesses;
+    if (!req.body || salary == 'NaN'){
         res.status(400).send();
     } else {
         next();
