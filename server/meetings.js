@@ -21,4 +21,15 @@ meetingsRouter.get('/', (req, res, next) => {
     }
 });
 
-  module.exports = meetingsRouter;
+//POST /api/meetings
+meetingsRouter.post('/', (req, res, next) => {
+    const meeting = createMeeting();
+    res.status(201).send(meeting);
+});
+
+meetingsRouter.delete('/', (req, res, next) => {
+    const deleteAll = deleteAllFromDatabase('meetings');
+    res.status(204).send();
+});
+
+module.exports = meetingsRouter;
