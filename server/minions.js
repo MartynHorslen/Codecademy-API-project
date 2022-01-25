@@ -28,9 +28,8 @@ minionsRouter.get('/:id', (req, res, next) => {
     if (found === -1){
         res.status(404).send();
     } else {
-        const obj = Object.fromEntries(found);
-        console.log(obj);
-        res.status(200).send(obj);
+        console.log(found);
+        res.status(200).send(found);
     }
 });
 
