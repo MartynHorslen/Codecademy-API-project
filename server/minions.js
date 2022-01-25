@@ -47,10 +47,7 @@ minionsRouter.get('/:id', (req, res, next) => {
 
 //POST & PUT minions validation
 const validation = (req, res, next) => {
-    //const name = req.body.name;
-    //const title = req.body.title;
     const salary = Number(req.body.salary);
-    //const weaknesses = req.body.weaknesses;
     if (!req.body || salary == 'NaN'){
         res.status(400).send();
     } else {
