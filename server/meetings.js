@@ -11,6 +11,15 @@ const {
     deleteAllFromDatabase,
   } = require('./db.js');
 
-
+//GET /api/meetings
+meetingsRouter.get('/', (req, res, next) => {
+    const allmeetings = getAllFromDatabase('meetings');
+    if (allmeetings === -1){
+        res.status(404).send();
+    } else {
+        console.log(allmeetings);
+        res.status(200).send(allmeetings);
+    }
+});
 
   module.exports = meetingsRouter;

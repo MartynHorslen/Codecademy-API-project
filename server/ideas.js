@@ -11,7 +11,16 @@ const {
     deleteAllFromDatabase,
   } = require('./db.js');
 
-
+//GET /api/ideas
+ideasRouter.get('/', (req, res, next) => {
+    const allIdeas = getAllFromDatabase('ideas');
+    if (allIdeas === -1){
+        res.status(404).send();
+    } else {
+        console.log(allIdeas);
+        res.status(200).send(allIdeas);
+    }
+});
 
 
   module.exports = ideasRouter;
