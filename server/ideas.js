@@ -73,5 +73,4 @@ ideasRouter.delete('/:id', (req, res, next) =>{
     res.status(204).send();
 });
 
-
-  module.exports = ideasRouter;
+module.exports = ideasRouter;
