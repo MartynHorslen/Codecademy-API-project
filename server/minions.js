@@ -58,10 +58,16 @@ minionsRouter.post('/', validation, (req, res, next) => {
     res.status(201).send(createMinion);
 });
 
-//PUT /api/minions
+//PUT /api/minions/:id
 minionsRouter.put('/:id', validation, (req, res, next) => {
-    const update = updateInstanceInDatabase('minions', req.body);
-    res.status(200).send(req.body);
+    const updateMinion = updateInstanceInDatabase('minions', req.body);
+    res.status(200).send(updateMinion);
+});
+
+//DELETE /api/minions/:id
+minionsRouter.delete('/:id', (req, res, next) =>{
+    const deleteMinion = deleteFromDatabasebyId('minions', req.body.id);
+    res.status(204).send();
 });
 
 module.exports = minionsRouter;
